@@ -27,6 +27,14 @@ class TestBoardFunctions(unittest.TestCase):
                 ]
 
 
+    def tearDown(self):
+        """ Destroy constructs for next test
+        """
+
+        del self.construct1
+        del self.construct2
+
+
     def test_create_board1(self):
         """ Test if the create_board function correctly sets up
         a 9x9 board initialized with 0 values.
@@ -60,7 +68,7 @@ class TestBoardFunctions(unittest.TestCase):
                 [0, 0, 0, 0, 0, 0, 0],
                 ]
 
-        self.assertEqual(sample_board, board.create_board(7, 5))
+        self.assertEqual(sample_board, board.create_board(5, 7))
 
 
     def test_load_construct1(self):
@@ -107,7 +115,7 @@ class TestBoardFunctions(unittest.TestCase):
                 [0, 0, 1, 1, 1, 0, 0, 0, 0],
                 [0, 0, 1, 1, 0, 0, 0, 0, 0],
                 [0, 1, 1, 1, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 1, 0, 0, 0, 0, 0, 0],
                 [0, 0, 0, 0, 0, 0, 0, 0, 0],
                 [0, 0, 0, 0, 0, 0, 0, 0, 0],
                 [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -150,7 +158,7 @@ class TestBoardFunctions(unittest.TestCase):
                 ]
 
         self.assertRaises(IndexError, board.load_construct,
-                sample_empty_board, self.contruct1, 7, 5)
+                sample_empty_board, self.construct1, 7, 5)
      
     
     def test_get_coords1(self):
