@@ -33,6 +33,18 @@ def get_coords(construct):
             if cell:
                 yield (i, j)
 
+def next_board(board):
+    """ Takes current board and returns new board with the next generation
+    state, based on the following rules:
+    1) If cell is alive, remains alive if 2 or 3 surrounding cells are alive,
+    else the cell dies.
+    2) If cell is dead, becomes alive if 3 surrounding cells are alive
+    Surrounding cells are defined as the 8 cells horizontally, vertically 
+    and diagonally adjacent.
+    Edges of the board are treated as "dead".
+    """
+    pass
+
 def main():
     pass
 

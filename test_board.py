@@ -188,5 +188,71 @@ class TestBoardFunctions(unittest.TestCase):
         self.assertEqual(coords, list(board.get_coords(self.construct2)))
 
 
+    def test_next_board1(self):
+        """ Takes initial state with a blinker, block and a lone straggler.
+        Checks next_board function can generate the next state correctly.
+        """
+
+        sample_initial_board = [
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 1, 0, 0, 0, 0, 0, 0],
+                [0, 0, 1, 0, 0, 0, 0, 0, 0],
+                [0, 0, 1, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 1, 0, 0, 1, 1, 0, 0],
+                [0, 0, 0, 0, 0, 1, 1, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                ]
+
+        sample_next_board = [
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 1, 1, 1, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 1, 1, 0, 0],
+                [0, 0, 0, 0, 0, 1, 1, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                ]
+
+        self.assertEqual(sample_next_board, board.next_board(sample_initial_board))
+
+
+    def test_next_board2(self):
+        """ Takes initial state with a glider, beacon and blinker next to
+        the board edge.
+        Checks next_board function can generate the next state correctly.
+        """
+
+        sample_initial_board = [
+                [0, 0, 0, 0, 0, 0, 1, 1, 1],
+                [0, 0, 1, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 1, 0, 0, 0, 0, 0],
+                [0, 1, 1, 1, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 1, 1],
+                [0, 0, 0, 0, 0, 0, 0, 1, 1],
+                [0, 0, 0, 0, 0, 1, 1, 0, 0],
+                [0, 0, 0, 0, 0, 1, 1, 0, 0],
+                ]
+
+        sample_next_board = [
+                [0, 0, 0, 0, 0, 0, 0, 1, 0],
+                [0, 0, 0, 0, 0, 0, 0, 1, 0],
+                [0, 1, 0, 1, 0, 0, 0, 0, 0],
+                [0, 0, 1, 1, 0, 0, 0, 0, 0],
+                [0, 0, 1, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 1, 1],
+                [0, 0, 0, 0, 0, 0, 0, 0, 1],
+                [0, 0, 0, 0, 0, 1, 0, 0, 0],
+                [0, 0, 0, 0, 0, 1, 1, 0, 0],
+                ]
+
+        self.assertEqual(sample_next_board, board.next_board(sample_initial_board))
+
+
+
 if __name__ == '__main__':
     unittest.main()
