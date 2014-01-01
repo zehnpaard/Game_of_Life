@@ -20,7 +20,10 @@ def load_construct(board, construct, top_row=0, left_col=0):
     """
     max_row, max_col = len(board), len(board[0])
     con_row, con_col = len(construct), len(construct[0])
-    if max_row < con_row + top_row or max_col < con_col + left_col:
+    if max_row < con_row + top_row or \
+            max_col < con_col + left_col or \
+            top_row < 0 or \
+            left_col < 0:
         raise IndexError
 
     for row, col in get_coords(construct):
@@ -83,17 +86,28 @@ def valid_range(cell_index, side_count):
 def get_value(board, row, col):
     """ Get value of cell
     """
-    pass
+    check_inputs(board, row, col)
+    return board[row][col]
 
 def set_alive(board, row, col):
     """ Set value of cell to alive
     """
-    pass
+    check_inputs(board, row, col)
+    board[row][col] = 1
 
 def set_dead(board, row, col):
     """ Set value of cell to dead
     """
-    pass
+    check_inputs(board, row, col)
+    board[row][col] = 0
+
+def check_inputs(board, row, col):
+    max_row, max_col = len(board), len(board[0])
+    if max_row <= row or \
+            max_col <= col or \
+            row < 0 or \
+            col < 0:
+                raise IndexError
 
 
 def main():

@@ -279,7 +279,7 @@ class TestBoardFunctions(unittest.TestCase):
         if the cell is available, and IndexError if out of range.
         """
 
-        sample_board = [
+        sample_board1 = [
                 [0, 0, 0, 0, 0, 0, 0, 0, 0],
                 [0, 0, 0, 0, 0, 0, 0, 0, 0],
                 [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -291,7 +291,7 @@ class TestBoardFunctions(unittest.TestCase):
                 [0, 0, 0, 0, 0, 0, 0, 0, 0],
                 ]
 
-        sample_empty_board = [
+        sample_board2 = [
                 [0, 0, 0, 0, 0, 0, 0, 0, 0],
                 [0, 0, 0, 0, 0, 0, 0, 0, 0],
                 [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -304,9 +304,10 @@ class TestBoardFunctions(unittest.TestCase):
                 ]
 
 
-        self.assertEqual(sample_board, board.set_alive(sample_empty_board, 4, 7))
+        board.set_alive(sample_board2, 4, 7)
+        self.assertEqual(sample_board1, sample_board2)
         self.assertRaises(IndexError, board.set_alive,
-                sample_empty_board, 5, 11)
+                sample_board2, 5, 11)
 
     def test_set_dead(self):
         """ Check the set_dead function updates the board correctly
