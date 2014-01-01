@@ -80,6 +80,21 @@ def valid_range(cell_index, side_count):
     """
     return xrange(max(0, cell_index-1), min(cell_index+2, side_count)) 
 
+def get_value(board, row, col):
+    """ Get value of cell
+    """
+    pass
+
+def set_alive(board, row, col):
+    """ Set value of cell to alive
+    """
+    pass
+
+def set_dead(board, row, col):
+    """ Set value of cell to dead
+    """
+    pass
+
 
 def main():
     pass

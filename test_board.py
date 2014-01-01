@@ -252,6 +252,98 @@ class TestBoardFunctions(unittest.TestCase):
 
         self.assertEqual(sample_next_board, board.next_board(sample_initial_board))
 
+    def test_get_value(self):
+        """ Check the get_value function returns the correct value
+        if available, and IndexError if out of range.
+        """
+
+        sample_board = [
+                [0, 0, 0, 0, 0, 0, 1, 1, 1],
+                [0, 0, 1, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 1, 0, 0, 0, 0, 0],
+                [0, 1, 1, 1, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 1, 1],
+                [0, 0, 0, 0, 0, 0, 0, 1, 1],
+                [0, 0, 0, 0, 0, 1, 1, 0, 0],
+                [0, 0, 0, 0, 0, 1, 1, 0, 0],
+                ]
+
+        self.assertEqual(1, board.get_value(sample_board, 0, 8))
+        self.assertEqual(0, board.get_value(sample_board, 4, 4))
+        self.assertRaises(IndexError, board.get_value,
+                sample_board, 9, 1)
+
+    def test_set_alive(self):
+        """ Check the set_alive function updates the board correctly
+        if the cell is available, and IndexError if out of range.
+        """
+
+        sample_board = [
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 1, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                ]
+
+        sample_empty_board = [
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                ]
+
+
+        self.assertEqual(sample_board, board.set_alive(sample_empty_board, 4, 7))
+        self.assertRaises(IndexError, board.set_alive,
+                sample_empty_board, 5, 11)
+
+    def test_set_dead(self):
+        """ Check the set_dead function updates the board correctly
+        if the cell is available, and IndexError if out of range.
+        """
+
+        sample_board1 = [
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 1, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 1, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 1, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                ]
+
+        sample_board2 = [
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 1, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                ]
+
+
+        board.set_dead(sample_board1, 6, 6)
+        board.set_dead(sample_board1, 4, 1)
+
+        self.assertEqual(sample_board1, sample_board2)
+        self.assertRaises(IndexError, board.set_dead, sample_board1, 9, 8)
+
 
 
 if __name__ == '__main__':
