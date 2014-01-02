@@ -19,18 +19,20 @@ class App(object):
     def __init__(self, rows, cols, speed):
         self.root = Tkinter.Tk()
 
-        self.rows = rows
-        self.cols = cols
+        self._rows = rows
+        self._cols = cols
 
-        self.speed = speed 
+        self._speed = speed 
 
-        self.generation = 0
+        self._generation = 0
         self._active = False
 
 
-        self.game_board = board.create_board(self.rows, self.cols)
-        self.gui = gui.GuiApp(self)
-        self.gui.pack()
+        self._game_board = board.create_board(self._rows, self._cols)
+        self._gui = gui.GuiApp(self,
+                canvas_rows=self._rows, canvas_cols=self._cols, 
+                speed=self._speed, generation=self._generation)
+        self._gui.pack()
 
 
     def _tick(self):
@@ -42,27 +44,27 @@ class App(object):
         If game state is not active, do nothing
         """
         if self._active:
-            self.game_board = board.next_board(self.game_board)
+            self._game_board = board.next_board(self._game_board)
 
 
-            self.gui.canvas.clear_live()
-            for row, col in board.get_coords(self.game_board):
-                self.gui.canvas.display_cell_as_alive(row, col)
+            self._gui.canvas.clear_live()
+            for row, col in board.get_coords(self._game_board):
+                self._gui.canvas.display_cell_as_alive(row, col)
 
 
-            self.generation += 1
-            self.gui.update_generation_display(self.generation)
+            self._generation += 1
+            self._gui.update_generation_display(self._generation)
 
-            self.root.after(self.speed, self._tick)
+            self.root.after(self._speed, self._tick)
 
 
     def update_cell_in_board_data(self, row, col):
         """ 'Flip' the value in cell on the board data
         """
-        if board.get_value(self.game_board, row, col):
-            board.set_dead(self.game_board, row, col)
+        if board.get_value(self._game_board, row, col):
+            board.set_dead(self._game_board, row, col)
         else:
-            board.set_alive(self.game_board, row, col)
+            board.set_alive(self._game_board, row, col)
 
     def activate_game(self):
         """ 1) Set the game speed to match the entry,
@@ -72,7 +74,7 @@ class App(object):
         If inputted game speed is not valid, raise an Error
         """
         try:
-            self.speed = int(self.gui.speed_text.get())
+            self._speed = int(self._gui.speed_text.get())
         except ValueError:
             raise ValueError
         self._active = True
