@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import itertools
-
 """ Implements functions related to the creation, loading and updating
 of the game board.
 """
+
+import itertools
 
 def create_board(row_count, col_count):
     """ Creates a board representation, row_count x col_count, with 
