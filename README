@@ -1,7 +1,7 @@
 Implementation of Conway's Game of Life in python 2.7 as practice project,
 attempting Test Driven Development and some degree of functional programming style
 
-Board size to be set to 100x100
+Board size to be set to 80x80
 Board edges to count as "dead"
 
 Gui implemented in Tkinter, with displays for the generation #, input for
